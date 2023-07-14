@@ -63,6 +63,10 @@ public class RoleService {
         System.out.println("INFO: Team Name: " + team.get("name"));
         System.out.println("INFO: Member Name: " + member.get("firstName"));
 
+        if(roleName == null){
+            roleName = "Developer";
+        }
+
         //Verifying if the given Role exists in the database
         Role role = roleRepository.findByName(roleName);
         if (role == null) {
