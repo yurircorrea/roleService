@@ -39,6 +39,14 @@ public class RoleService {
     @Value("${members.path}")
     private String membersPath;
 
+    public void setTeamsPath(String path){
+        this.teamsPath = path;
+    }
+
+    public void setMembersPath(String path){
+        this.membersPath = path;
+    }
+
     public Role createRole(String name){
         //Verifying if the given Role already exists
         if (roleRepository.findByName(name) != null) {
