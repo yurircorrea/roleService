@@ -17,6 +17,8 @@ import com.testeyuri.roleService.entity.Membership;
 import com.testeyuri.roleService.entity.MembershipRole;
 import com.testeyuri.roleService.entity.Role;
 import com.testeyuri.roleService.entity.RoleRequest;
+import com.testeyuri.roleService.exception.BadRequestException;
+import com.testeyuri.roleService.exception.NotFoundException;
 import com.testeyuri.roleService.service.RoleService;
 
 @RestController
@@ -27,32 +29,64 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping("/createRole")
-    public ResponseEntity<Role> createRole(@RequestBody RoleRequest roleRequest) {
-        Role createdRole = roleService.createRole(roleRequest.getRoleName());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdRole);
+    public ResponseEntity createRole(@RequestBody RoleRequest roleRequest){
+        try{
+            Role createdRole = roleService.createRole(roleRequest.getRoleName());
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdRole);
+        }catch(BadRequestException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/{memberId}/teams/{teamId}")
-    public ResponseEntity<Membership> assignRole(
+    public ResponseEntity assignRole(
             @PathVariable String memberId,
             @PathVariable String teamId,
-            @RequestBody RoleRequest roleRequest) throws IOException {
-        Membership createdMembership = roleService.assignRole(memberId, teamId, roleRequest.getRoleName());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdMembership);
+            @RequestBody RoleRequest roleRequest){
+
+        try{
+            Membership createdMembership = roleService.assignRole(memberId, teamId, roleRequest.getRoleName());
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdMembership);
+        }catch(BadRequestException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @GetMapping("/{memberId}/teams/{teamId}")
-    public ResponseEntity<MembershipRole> getRoleForMembership(
+    public ResponseEntity getRoleForMembership(
             @PathVariable String memberId,
-            @PathVariable String teamId) throws IOException {
-        MembershipRole role = roleService.getRoleForMembership(memberId, teamId);
-        return ResponseEntity.ok(role);
+            @PathVariable String teamId) {
+        try {
+            MembershipRole role = roleService.getRoleForMembership(memberId, teamId);
+            return ResponseEntity.ok(role);
+        }catch(BadRequestException e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{roleName}/memberships")
-    public ResponseEntity<List<Membership>> getMembershipsForRole(
+    public ResponseEntity getMembershipsForRole(
             @PathVariable String roleName) {
-        List<Membership> memberships = roleService.lookupMembershipsForRole(roleName);
-        return ResponseEntity.ok(memberships);
+        try {
+            List<Membership> memberships = roleService.getMembershipsForRole(roleName);
+            return ResponseEntity.ok(memberships);
+        }catch(BadRequestException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }catch (NotFoundException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
