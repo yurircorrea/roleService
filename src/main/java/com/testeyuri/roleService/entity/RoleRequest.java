@@ -1,5 +1,8 @@
 package com.testeyuri.roleService.entity;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class RoleRequest {
     private String roleName;
 
