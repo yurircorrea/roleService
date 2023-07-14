@@ -10,4 +10,5 @@ import com.testeyuri.roleService.entity.Role;
 @Component
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Role findByName(String name);
+    Role findById(String id);
 }

@@ -1,6 +1,7 @@
 package com.testeyuri.roleService.service;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.testeyuri.roleService.entity.*;
 
 import com.testeyuri.roleService.helper.GetObjectFromURL;
@@ -77,8 +79,18 @@ public class RoleService {
         return  membershipRepository.save(membership);
     }
 
-    public Role lookupRoleForMember(String memberId, String teamId) {
-        return new Role(UUID.randomUUID().toString(), "developer");// Implementation logic to lookup a role for a membership
+    public MembershipRole getRoleForMembership(String memberId, String teamId) throws IOException {
+        //There is no need to check either the Member or Team exist or not, because there will be no data storing. In case
+        // any of them doesn't exist, the Membership won't be found and an Exception will already be thrown.
+
+        Membership membership = membershipRepository.findByMemberAndTeam(memberId, teamId);
+        if(membership == null){
+            throw new IllegalArgumentException("No Membership was found for the given Member and Team");
+        }
+
+        Role role = roleRepository.findById(membership.getRole());
+
+        return new MembershipRole(membership, role);
     }
 
     public List<Membership> lookupMembershipsForRole(String roleName) {

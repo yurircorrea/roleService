@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.testeyuri.roleService.entity.Membership;
+import com.testeyuri.roleService.entity.MembershipRole;
 import com.testeyuri.roleService.entity.Role;
 import com.testeyuri.roleService.entity.RoleRequest;
 import com.testeyuri.roleService.service.RoleService;
@@ -41,10 +42,10 @@ public class RoleController {
     }
 
     @GetMapping("/{memberId}/teams/{teamId}")
-    public ResponseEntity<Role> getRoleForMember(
+    public ResponseEntity<MembershipRole> getRoleForMembership(
             @PathVariable String memberId,
-            @PathVariable String teamId) {
-        Role role = roleService.lookupRoleForMember(memberId, teamId);
+            @PathVariable String teamId) throws IOException {
+        MembershipRole role = roleService.getRoleForMembership(memberId, teamId);
         return ResponseEntity.ok(role);
     }
 
