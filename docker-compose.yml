@@ -1,0 +1,13 @@
+version: '3'
+services:
+  roles-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: roles_service
+    container_name: roleservice
+    working_dir: /app
+    volumes:
+      - ~/Users/yurir/dev/roleService:/app/roleService
+    ports:
+      - "8080:8080"
