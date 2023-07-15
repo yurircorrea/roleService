@@ -56,7 +56,7 @@ These software needs to be installed on your machine:
 
 ###Using the application:
 - You can use the application by sending HTTP Requests to it, using a API Testing software, such as Insomnia or Postman;
-- An exported JSON Collection, containing all the Request neede to properly test the app is located at ``/api_collection.json``.
+- An exported JSON Collection, containing all the Requests needed to properly test the app is located at ``/api_collection.json``.
 
 ## Improvement Suggestion for Teams and Members Services
 
