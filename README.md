@@ -18,7 +18,7 @@ To solve the problem, the following approach was used:
 1. **Identify the Requirements**: Understand the problem statement and the desired functionality of the Roles service.
 2. **Creation of GIT Repository**: An new repository was created on GitHub so the solution code could be easily provided.
 3. **Creation of the Database**: An MySQL database was created to store the data regarding the roles and memberships of members on the teams.
-4. **Design the Data Model**: Define the necessary entities (Role, Membership) and their relationships. An Membership contains one Role, one User and one Team. However, Users, Teams and Roles can be included in as many Memberships as desired.
+4. **Design the Data Model**: Define the necessary entities (Role, Membership) and their relationships. A Membership contains one Role, one User and one Team. However, Users, Teams and Roles can be included in as many Memberships as desired.
 5. **Service Layer**: Creation of the RoleService class to handle business logic and interact with the database through the RoleRepository and MembershipRepository interfaces.
 6. **Controller Layer**: Development of the RoleController class to define REST endpoints and handle incoming HTTP requests.
 7. **Unit Tests**: Creation of unit tests using JUnit and Mockito to validate the functionality of the service. The most important tests were made over the RoleService class. However, some entity classes were also tested.
@@ -29,11 +29,9 @@ To solve the problem, the following approach was used:
 This application uses Docker to be installed and executed. Follow the steps bellow to ensure the proper configuration:
 
 ###Dependencies: 
-These software needs to be installed on your machine:
+These dependencies are required to be installed on your local machine, in order to run this project:
 - Git
 - MySQL Server Version 8.0
-- Oracle Java JDK Version 11
-- Apache Maven
 
 ###Downloading the project:
 
@@ -46,7 +44,7 @@ These software needs to be installed on your machine:
 
 ###Building and running:
 
-- Open your favorite database manager (DBMS) and run the script located at ``/script.sql``. This will ensure the creation and populatiob of the database
+- Open your favorite database manager (DBMS) and run the script located at ``/script.sql``. This will ensure the creation and population of the database
 - Edit the ``docker-compose.yml`` file, located on the project root folder, as follows:
   - At the line #11, replace the ``~/Users/yurir/dev/roleService`` portion of the code with the path to where your ``rolesService`` project is located;
   - At the line #13, replace the por on which docker will publish the app, if needed, in case your 8080 port cannot be allocated;
@@ -55,12 +53,12 @@ These software needs to be installed on your machine:
 - Open your browser and test the application status at ``http://localhost:8080``. If you configured everything right, the Apache Whitelabel Error Page should appear.
 
 ###Using the application:
-- You can use the application by sending HTTP Requests to it, using a API Testing software, such as Insomnia or Postman;
+- You can use the application by sending HTTP Requests to it, using an API Testing software, such as Insomnia or Postman;
 - An exported JSON Collection, containing all the Requests needed to properly test the app is located at ``/api_collection.json``.
 
 ## Improvement Suggestion for Teams and Members Services
 
-In the current scenario, the Teams service is returning all the members of a team in a array named teamMemberIds, included on the Team object.
+In the current scenario, the Teams service is returning all the members of a team in an array named teamMemberIds, included on the Team object.
 The enhancement made with the Roles and Memberships Service already allows this to be improved, since it provides a new Object to handle the participation of a member on a team, which is the Membership.
 This also allows the developers of the Teams service to remove the teamMemberIds object from the returning JSON, once this information can now be acquired differently.
 
