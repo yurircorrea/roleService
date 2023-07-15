@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "01664329-622c-4640-bde2-3ee753c494a5",
+		"name": "roleService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16003682"
+	},
+	"item": [
+		{
+			"name": "createRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roleName\": \"Developer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/roles/createRole",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"createRole"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assignRole",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roleName\": \"Developer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/roles/fd282131-d8aa-4819-b0c8-d9e0bfb1b75c/teams/7676a4bf-adfe-415c-941b-1739af07039b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"fd282131-d8aa-4819-b0c8-d9e0bfb1b75c",
+						"teams",
+						"7676a4bf-adfe-415c-941b-1739af07039b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRoleForMembership",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/roles/fd282131-d8aa-4819-b0c8-d9e0bfb1b75c/teams/7676a4bf-adfe-415c-941b-1739af07039b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"fd282131-d8aa-4819-b0c8-d9e0bfb1b75c",
+						"teams",
+						"7676a4bf-adfe-415c-941b-1739af07039b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMembershipsForRole",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/roles/developer/memberships",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"roles",
+						"developer",
+						"memberships"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

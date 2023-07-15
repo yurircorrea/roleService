@@ -5,10 +5,11 @@ This WEB service was developed as part of the coding challenge for e-Core.
 
 ## Table of Contents
 
-- [Description of the Problem Approach and Solution](#approach)
-- [Installation and Execution Instructions](#installation-and-execution)
-- [Improvement Suggestion for Teams and Members Services](#evolution-suggestions)
-- [Validation and Edge Cases Considered](#edge-cases-considered)
+- Description of the Problem Approach and Solution
+- Installation and Execution Instructions
+- Improvement Suggestion for Teams and Members Services
+- Validation and Edge Cases Considered
+- What happens if the data you are using gets deleted?
 
 ## Description of the Problem Approach and Solution
 
@@ -25,8 +26,37 @@ To solve the problem, the following approach was used:
 
 ## Installation and Execution
 
-There is a possibility to execute this project either with or without Docker.
+This application uses Docker to be installed and executed. Follow the steps bellow to ensure the proper configuration:
 
+###Dependencies: 
+These software needs to be installed on your machine:
+- Git
+- MySQL Server Version 8.0
+- Oracle Java JDK Version 11
+- Apache Maven
+
+###Downloading the project:
+
+- Run the following Git command to download the application:
+
+    ``git clone https://github.com/yurircorrea/roleService.git``;
+
+- Move the ``roleService`` folder to any desired location on your local machine;
+- Open the ``roleService`` folder using your favorite IDE.
+
+###Building and running:
+
+- Open your favorite database manager (DBMS) and run the script located at ``/script.sql``. This will ensure the creation and populatiob of the database
+- Edit the ``docker-compose.yml`` file, located on the project root folder, as follows:
+  - At the line #11, replace the ``~/Users/yurir/dev/roleService`` portion of the code with the path to where your ``rolesService`` project is located;
+  - At the line #13, replace the por on which docker will publish the app, if needed, in case your 8080 port cannot be allocated;
+- At the ``src/main/resources/application.properties`` file, change the port of MySQL connection at the line #2, if needed, to match the port on which your MySQL is running;
+- Open a Terminal Window and run: ``docker-compose up``. This should create the Docker container and run the application inside it;
+- Open your browser and test the application status at ``http://localhost:8080``. If you configured everything right, the Apache Whitelabel Error Page should appear.
+
+###Using the application:
+- You can use the application by sending HTTP Requests to it, using a API Testing software, such as Insomnia or Postman;
+- An exported JSON Collection, containing all the Request neede to properly test the app is located at ``/api_collection.json``.
 
 ## Improvement Suggestion for Teams and Members Services
 
